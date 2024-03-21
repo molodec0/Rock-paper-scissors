@@ -24,7 +24,15 @@ int main() {
 	int victory = 0, defeat = 0, draw = 0, round = 3;
 	string reply;
 
+	cout << "- - - - - - - - - -" << endl;
+	cout << endl;
+	cout << "Популярная игра камень, ножницы, бумага.";
+	cout << "Сможешь ли ты выиграть компьютер в эту игру?" << endl;
+	cout << "Если захочешь закончить игру, введи в консоль команду 'break'!" << endl;
 	cout << "У тебя всего три раунда, готов?" << endl;
+	cout << endl;
+	cout << "- - - - - - - - - -" << endl;
+	cout << endl;
 
 	for (round == 0; round--;) {
 
@@ -80,6 +88,17 @@ int main() {
 			}
 		}
 
+		else if (reply == "break") {
+			cout << endl;
+			cout << "- - - - - - - - - -" << endl;
+			cout << endl;
+			cout << "Жалко что ты уходишь! =(" << endl;
+			cout << "Приходи в следующий раз поиграть!" << endl;
+			cout << endl;
+			cout << "- - - - - - - - - -" << endl;
+			break;
+		}
+
 		else {
 			cout << "Эмм . . . Я тебя не совсем понял. Давай по новой!" << endl;
 			round++;
@@ -105,6 +124,8 @@ int main() {
 		cout << "- - - - - - - - - -" << endl;
 	}
 
+	cout << endl;
+	cout << "Для выхода из программы нажмите на клавишу . . .";
 	system("pause > nul");
 
 	return 0;
