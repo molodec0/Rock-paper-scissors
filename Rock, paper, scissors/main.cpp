@@ -18,11 +18,13 @@ string random() {
 	return random[random_index];
 }
 
+//Код главной функции.
 int main() {
+
 	system("chcp 1251 > nul");
 
-	int victory = 0, defeat = 0, draw = 0, round = 3;
-	string reply;
+	int answer = 0, victory = 0, defeat = 0, draw = 0, round = 3;
+	string reply, choice;
 
 	cout << "- - - - - - - - - -" << endl;
 	cout << endl;
@@ -34,18 +36,40 @@ int main() {
 	cout << "- - - - - - - - - -" << endl;
 	cout << endl;
 
-	for (round == 0; round--;) {
+	cout << "Выбери уровень сложности: " << endl;
+	cout << "1, 2, 3?" << endl;
+	cin >> answer;
+
+	if (answer == 1) {
+		cout << "Лёгкий уровень сложности, у тебя есть три раунда!" << endl;
+		round = 3;
+	}
+	else if (answer == 2) {
+		cout << "Средний уровень сложности, у тебя есть шесть раундов!" << endl;
+		round = 6;
+	}
+	else if (answer == 3) {
+		cout << "Сложный уровень сложности, у тебя есть девять раундов!" << endl;
+		round = 9;
+	}
+	else {
+		cout << "Ошибка! Некорректный ввод в консоль!" << endl;
+		return 1; 
+	}
+
+	for (; round > 0; round--) {
+		choice = random();
 
 		cout << "Камень, ножницы, бумага?" << endl;
 		cin >> reply;
 
 		if (reply == "камень") {
 			
-			if (random() == "камень") {
+			if (choice == "камень") {
 				cout << "Хмм, ничья! Ещё +1 раунд" << endl;
 				round++;
 			}
-			else if (random() == "ножницы") {
+			else if (choice == "ножницы") {
 				cout << "Ты выиграл раунд!" << endl;
 				victory++;
 			}
@@ -58,11 +82,11 @@ int main() {
 
 		else if (reply == "ножницы") {
 
-			if (random() == "камень") {
+			if (choice == "камень") {
 				cout << "Оуу . . . Ты проиграл раунд!" << endl;
 				defeat++;
 			}
-			else if (random() == "ножницы") {
+			else if (choice == "ножницы") {
 				cout << "Хмм, пока что ничья! Ещё +1 раунд" << endl;
 				round++;
 			}
@@ -74,11 +98,11 @@ int main() {
 
 		else if (reply == "бумага") {
 
-			if (random() == "камень") {
+			if (choice == "камень") {
 				cout << "Ты выиграл раунд!" << endl;
 				victory++;
 			}
-			else if (random() == "ножницы") {
+			else if (choice == "ножницы") {
 				cout << "Оу . . . Ты проиграл раунд!" << endl;
 				defeat++;
 			}
@@ -96,11 +120,11 @@ int main() {
 			cout << "Приходи в следующий раз поиграть!" << endl;
 			cout << endl;
 			cout << "- - - - - - - - - -" << endl;
-			break;
+			return 1;
 		}
 
 		else {
-			cout << "Эмм . . . Я тебя не совсем понял. Давай по новой!" << endl;
+			cout << "Ошибка! Некорректный ввод в консоль! Давай попробуем ещё раз!" << endl;
 			round++;
 		}
 
@@ -115,7 +139,7 @@ int main() {
 		cout << "- - - - - - - - - -" << endl;
 	}
 
-	else if (defeat >> victory) {
+	else if (defeat > victory) {
 		cout << endl;
 		cout << "- - - - - - - - - -" << endl;
 		cout << endl;
@@ -126,6 +150,7 @@ int main() {
 
 	cout << endl;
 	cout << "Для выхода из программы нажмите на клавишу . . .";
+
 	system("pause > nul");
 
 	return 0;
