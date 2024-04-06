@@ -1,36 +1,31 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <random>
 
 using namespace std;
 
-string random() {
-	vector <string> random = { "камень", "ножницы", "бумага" };
-
+//Код функций рандома.
+int random(int min, int max) {
 	random_device rd;
+
 	mt19937 gen(rd());
 
-	uniform_int_distribution<> dist(0, random.size() - 1);
+	uniform_int_distribution <int> distrib(min, max);
 
-	int random_index = dist(gen);
-
-	return random[random_index];
+	return distrib(gen);
 }
 
-//Код главной функции.
+//Код главной функций.
 int main() {
-
 	system("chcp 1251 > nul");
 
-	int answer = 0, victory = 0, defeat = 0, draw = 0, round = 3;
-	string reply, choice;
+	int round = 3, choice, reply, answer;
+	string res;
 
 	cout << "- - - - - - - - - -" << endl;
 	cout << endl;
-	cout << "Популярная игра камень, ножницы, бумага.";
-	cout << "Сможешь ли ты выиграть компьютер в эту игру?" << endl;
-	cout << "Если захочешь закончить игру, введи в консоль команду 'break'!" << endl;
+	cout << "Игра угадай число.";
+	cout << "Сможешь ли ты отгадать число, которое загадал компьютер?" << endl;
 	cout << "У тебя всего три раунда, готов?" << endl;
 	cout << endl;
 	cout << "- - - - - - - - - -" << endl;
@@ -41,115 +36,83 @@ int main() {
 	cin >> answer;
 
 	if (answer == 1) {
-		cout << "Лёгкий уровень сложности, у тебя есть три раунда!" << endl;
-		round = 3;
+		cout << "Лёгкий уровень сложности, указан диапозон чисел от 1 до 10!" << endl;
+		cout << "Твоё количество раундов равно 9" << endl;
+		choice = random(1, 10);
+		round = 9;
 	}
 	else if (answer == 2) {
-		cout << "Средний уровень сложности, у тебя есть шесть раундов!" << endl;
+		cout << "Средний уровень сложности, указан диапозон чисел от 1 до 50!" << endl;
+		cout << "Твоё количество раундов равно 6" << endl;
+		choice = random(1, 50);
 		round = 6;
 	}
 	else if (answer == 3) {
-		cout << "Сложный уровень сложности, у тебя есть девять раундов!" << endl;
-		round = 9;
+		cout << "Сложный уровень сложности, указан диапозон чисел от 1 до 100!" << endl;
+		cout << "Твоё количество раундов равно 3" << endl;
+		cout << "Также подсказки отсутствуют!" << endl;
+		choice = random(1, 100);
+		round = 3;
 	}
 	else {
 		cout << "Ошибка! Некорректный ввод в консоль!" << endl;
-		return 1; 
+		return 1;
 	}
 
 	for (; round > 0; round--) {
-		choice = random();
 
-		cout << "Камень, ножницы, бумага?" << endl;
+		cout << "Какое число?" << endl;
+
 		cin >> reply;
 
-		if (reply == "камень") {
-			
-			if (choice == "камень") {
-				cout << "Хмм, ничья! Ещё +1 раунд" << endl;
-				round++;
+		if (answer == 1) {
+			if (reply < choice) {
+				cout << "Неверно! Но дам подсказку. Указанное число меньше загаданного!" << endl;
 			}
-			else if (choice == "ножницы") {
-				cout << "Ты выиграл раунд!" << endl;
-				victory++;
+			else if (reply > choice) {
+				cout << "Неверно! Но дам подсказку. Указанное число больше загаданного!" << endl;
 			}
-			else {
-				cout << "Оуу . . . Ты проиграл раунд!" << endl;
-				defeat++;
-			}
-
-		}
-
-		else if (reply == "ножницы") {
-
-			if (choice == "камень") {
-				cout << "Оуу . . . Ты проиграл раунд!" << endl;
-				defeat++;
-			}
-			else if (choice == "ножницы") {
-				cout << "Хмм, пока что ничья! Ещё +1 раунд" << endl;
-				round++;
+			else if (reply == choice) {
+				cout << "Ура, ты выиграл печеньку!" << endl;
+				return 0;
 			}
 			else {
-				cout << "Ты выиграл раунд!" << endl;
-				victory++;
-			}
-		}
-
-		else if (reply == "бумага") {
-
-			if (choice == "камень") {
-				cout << "Ты выиграл раунд!" << endl;
-				victory++;
-			}
-			else if (choice == "ножницы") {
-				cout << "Оу . . . Ты проиграл раунд!" << endl;
-				defeat++;
-			}
-			else {
-				cout << "Хмм, пока что ничья! Ещё +1 раунд" << endl;
+				cout << "Ошибка! Некорректный ввод в консоль! Давай попробуем ещё раз!" << endl;
 				round++;
 			}
 		}
-
-		else if (reply == "break") {
-			cout << endl;
-			cout << "- - - - - - - - - -" << endl;
-			cout << endl;
-			cout << "Жалко что ты уходишь! =(" << endl;
-			cout << "Приходи в следующий раз поиграть!" << endl;
-			cout << endl;
-			cout << "- - - - - - - - - -" << endl;
-			return 1;
+		else if (answer == 2) {
+			if (reply < choice) {
+				cout << "Неверно! Но дам подсказку. Указанное число меньше загаданного!" << endl;
+			}
+			else if (reply > choice) {
+				cout << "Неверно! Но дам подсказку. Указанное число больше загаданного!" << endl;
+			}
+			else if (reply == choice) {
+				cout << "Ура, ты выиграл печеньку!" << endl;
+				return 0;
+			}
+			else {
+				cout << "Ошибка! Некорректный ввод в консоль! Давай попробуем ещё раз!" << endl;
+				round++;
+			}
 		}
-
-		else {
-			cout << "Ошибка! Некорректный ввод в консоль! Давай попробуем ещё раз!" << endl;
-			round++;
+		else if (answer == 3) {
+			if (reply != choice) {
+				cout << "Неверно!" << endl;
+			}
+			else if (reply == choice) {
+				cout << "Ура, ты выиграл печеньку!" << endl;
+				return 0;
+			}
+			else {
+				cout << "Ошибка! Некорректный ввод в консоль! Давай попробуем ещё раз!" << endl;
+				round++;
+			}
 		}
-
 	}
 
-	if (victory > defeat) {
-		cout << endl;
-		cout << "- - - - - - - - - -" << endl;
-		cout << endl;
-		cout << "Поздравляю! Ты победил! =)" << endl;
-		cout << endl;
-		cout << "- - - - - - - - - -" << endl;
-	}
-
-	else if (defeat > victory) {
-		cout << endl;
-		cout << "- - - - - - - - - -" << endl;
-		cout << endl;
-		cout << "К сожалению ты проиграл! =(" << endl;
-		cout << endl;
-		cout << "- - - - - - - - - -" << endl;
-	}
-
-	cout << endl;
-	cout << "Для выхода из программы нажмите на клавишу . . .";
+	cout << "Загаданное число: " << choice << endl;
 
 	system("pause > nul");
 
